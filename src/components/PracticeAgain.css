@@ -68,3 +68,12 @@ overflow-y: scroll;
     position : absolute;
     bottom: 250px;
 }
+
+.smallBox{
+
+    width:15px;
+    height:15px;
+    border: 1px solid black;
+    border-radius: 3px;
+    cursor: pointer;
+}

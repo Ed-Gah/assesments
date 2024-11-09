@@ -11,7 +11,7 @@ export const PracticeAgain = ()=>{
     return(
        <div className="container">
         <h3>Favorite Movies</h3>
-        <input type="text" value={inputValue} className="inp" onChange={
+        <input type="text" className="inp" onChange={
           (e)=>{
 
             updateValue(e.target.value);
@@ -25,9 +25,9 @@ export const PracticeAgain = ()=>{
 
                 return(
                   <div className="innerSecond">
-                        <input type="checkbox" onClick={
-                        ()=>{
-                          
+                        <input type="checkbox" className="smallBox"  onClick={
+                        (e)=>{
+                            e.preventDefault(); 
                              var keep =  movies.filter(movy => movy !== movie);
                              updateMovies(keep);
 
@@ -60,7 +60,8 @@ export const PracticeAgain = ()=>{
 
                return(
                 <div className="innerSecond" key={index}>
-                  <input type="checkbox" onClick ={()=>{
+                  <input type="checkbox" onClick ={(e)=>{
+                      e.preventDefault(); 
                       updateMovies ([...movies,item ]);
                      var box= watchedMovies.filter((watched)=> watched!= item );
                      updateWatched(box);
