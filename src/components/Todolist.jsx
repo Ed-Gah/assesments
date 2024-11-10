@@ -7,7 +7,9 @@ import { useState } from 'react';
 export const Todolist = ()=>{
 
 const [todayList, updateTodayList] = useState(["Change Theme Colors","Review with Dev Team", "Finaize Slider Component", "Celebrate Release"]);
-
+const [inputValue, updateInput] = useState ("");
+const [choresDone, updateDoneChores] = useState([]);
+console.log(choresDone);
 
  return(
    <div className="container">
@@ -36,10 +38,46 @@ const [todayList, updateTodayList] = useState(["Change Theme Colors","Review wit
             <hr/>
             <div className="parent">
             
-                <input type="text" className="input"/>
+                <input type="text" value={inputValue} className="input" onChange={
+                    (e)=>{
+                        updateInput(e.target.value);
+
+
+                    }
+                }/>
                 
             </div>
-            <ul className="list">
+            <ul className="firstList">
+
+                {
+
+                todayList.map((todo, index)=>{
+
+                return(
+                <div className="arrange"  key={index}>
+
+                    <div className="circle" onClick={
+                        ()=>{
+                        var keep = todayList.filter(fini=> fini === todo);
+                        updateDoneChores([...choresDone, todo]);
+
+                        }
+
+                    }/>
+                    <li>{todo}</li>
+
+                </div>
+
+
+                )
+
+
+
+                })
+
+
+
+                }
                 
                 {/* <div className="arrange">
                     <div className="circle"></div>
@@ -57,25 +95,80 @@ const [todayList, updateTodayList] = useState(["Change Theme Colors","Review wit
                     <div className="circle"></div>
                     <li>Celebrate Release</li>
                 </div> */}
-                <div className="arrange">
-                    <div className="plus"><FaPlus size={20} /></div>
-                    <button className="btn" >Add Item</button>
-                </div>                                
+                                 
             </ul>
+            <button className="arrange format" onClick={
+                        (e)=>{
+                        e.preventDefault();
+
+                        if(inputValue){
+
+                            var lowerWord = inputValue.toLowerCase();
+                            var check = todayList.some(today=> today.toLowerCase()=== lowerWord);
+                            
+                            if(check){
+
+                            alert("It already exist");
+                            updateInput("");
+                            return;
+
+
+
+
+                            }
+                            updateTodayList([...todayList, inputValue]);
+                            updateInput("");
+
+
+
+
+
+                        }
+
+
+                        }
+
+
+                    } >
+                    <div className="plus"><FaPlus size={20} /></div>
+                    <button className="btn">Add Item</button>
+                </button>              
             <hr/>
             <div className="complete">
                 <h4>Completed</h4>
                 <MdDeleteOutline  size={20}/>
-                <ul className="list">
+          
+                
+            </div>
+            <ul className="secondList">
+                    {
+                      choresDone.map((moveDown, index)=>{
+                        
+                       return(
+
+                        <div className="arrange" key={index}>
+                            <div className="circle"/>
+                            <li>{moveDown}</li>
+                        </div>
+
+
+
+                       )
+
+
+
+                      })
+
+
+
+
+                    }
                     
                         
                         
 
 
                 </ul>
-                <ul>
-                </ul>
-            </div>
 
        </div>
     
