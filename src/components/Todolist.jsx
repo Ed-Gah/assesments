@@ -58,8 +58,9 @@ console.log(choresDone);
 
                     <div className="circle" onClick={
                         ()=>{
-                        var keep = todayList.filter(fini=> fini === todo);
+                        var keep = todayList.filter(fini=> fini !== todo);
                         updateDoneChores([...choresDone, todo]);
+                        updateTodayList(keep);
 
                         }
 
@@ -147,7 +148,20 @@ console.log(choresDone);
                        return(
 
                         <div className="arrange" key={index}>
-                            <div className="circle"/>
+                            <div className="circle" onClick={
+                                ()=>{
+
+                                var keep = choresDone.filter(chores=> chores !== moveDown);
+                                updateDoneChores(keep);
+                                updateTodayList([...todayList, moveDown]);
+
+
+
+
+                                }
+
+
+                            }/>
                             <li>{moveDown}</li>
                         </div>
 
